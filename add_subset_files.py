@@ -4,7 +4,6 @@
 import argparse
 import numpy as np
 import pandas as pd
-import sys
 import os.path
 import csv
 
@@ -15,13 +14,12 @@ parser.add_argument('--c', help='chrom', required=True, type=str)
 args = parser.parse_args()
 
 ### Load file and assign column names
-df = pd.read_csv(args.f, sep='\t', header=None) # parent 1
-df.columns = ['sync','chr','singleton','third','fourth','major_tie','majmin_prop','depth','counter','counter_prop']
+df = pd.read_csv(args.f, sep=',')
 
 total1 = df['singleton'].astype(int).sum()
 total2 = df['third'].astype(int).sum()
 total3 = df['fourth'].astype(int).sum()
-total4 = df['majortie'].astype(int).sum()
+total4 = df['major_tie'].astype(int).sum()
 total5 = df['majmin_prop'].astype(int).sum() / df['counter_prop'].astype(int).sum()
 total6 = df['depth'].astype(int).sum() / df['counter'].astype(int).sum()
 
